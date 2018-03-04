@@ -96,6 +96,7 @@ D:\VisualStudio\TErm\TErm\bin\ru\Microsoft.Owin.Security.Facebook.resources.dll
 D:\VisualStudio\TErm\TErm\bin\ru\Microsoft.Owin.Security.Google.resources.dll
 D:\VisualStudio\TErm\TErm\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 D:\VisualStudio\TErm\TErm\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-D:\VisualStudio\TErm\TErm\obj\Debug\TErm.csprojResolveAssemblyReference.cache
 D:\VisualStudio\TErm\TErm\obj\Debug\TErm.dll
 D:\VisualStudio\TErm\TErm\obj\Debug\TErm.pdb
+D:\VisualStudio\TErm\TErm\obj\Debug\TErm.csprojResolveAssemblyReference.cache
+D:\VisualStudio\TErm\TErm\bin\System.Json.dll

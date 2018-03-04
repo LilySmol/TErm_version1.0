@@ -1,0 +1,26 @@
+﻿@using TErm.Models
+@model List<IssuesModel>
+
+@{
+    ViewBag.Title = "IssuesTable";
+}
+
+<h2>Issues table</h2>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Estimate time</th>
+        <th>Spent time</th>
+    </tr>
+    @foreach (IssuesModel issue in Model)
+    {
+        <tr>
+            <td>@issue.title</td>
+            <td>@issue.description</td>
+            <td>@issue.time_stats.human_time_estimate</td>
+            <td>@issue.time_stats.human_total_time_spent</td>
+        </tr>
+    }
+</table>

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using TErm.Models
+@model List<ProjectModel>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -28,4 +30,24 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
+</div>
+
+<div>
+    <h2>Issues table</h2>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Estimate time</th>
+            <th>Spent time</th>
+        </tr>
+        @foreach (ProjectModel project in Model)
+        {
+            <tr>
+                <td>@project.id</td>
+                <td>@project.issuesList</td>
+            </tr>
+        }
+    </table>
 </div>
