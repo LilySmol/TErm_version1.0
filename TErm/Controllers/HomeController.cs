@@ -12,7 +12,8 @@ namespace TErm.Controllers
     {
         public ActionResult Index()
         {
-            List<ProjectModel> list = Parser.getProjectsListByPrivateToken("GG8RjMH3TyguYqP6FBxu", "LilySmol");
+            GitLabParser gitP = new GitLabParser();
+            List<ProjectModel> list = gitP.getProjectsListByPrivateToken("GG8RjMH3TyguYqP6FBxu", "LilySmol");
             //List<IssuesModel> model = Parser.getIssuesListByPrivateToken("GG8RjMH3TyguYqP6FBxu");
             return View(list);
         }
