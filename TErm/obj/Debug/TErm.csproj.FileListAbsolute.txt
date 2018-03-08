@@ -100,3 +100,5 @@ D:\VisualStudio\TErm\TErm\obj\Debug\TErm.dll
 D:\VisualStudio\TErm\TErm\obj\Debug\TErm.pdb
 D:\VisualStudio\TErm\TErm\obj\Debug\TErm.csprojResolveAssemblyReference.cache
 D:\VisualStudio\TErm\TErm\bin\System.Json.dll
+D:\VisualStudio\TErm\TErm\obj\Debug\TErm.csproj.GenerateResource.Cache
+D:\VisualStudio\TErm\TErm\obj\Debug\TErm.Resource.resources

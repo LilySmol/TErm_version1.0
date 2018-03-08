@@ -34,8 +34,6 @@ namespace TErm.Controllers
         {
             string response = get(privateToken, linkIssues);
             List<IssuesModel> issuesList = JsonConvert.DeserializeObject<List<IssuesModel>>(response);
-            //dynamic obj = JsonConvert.DeserializeObject(issuesContent);
-            //var project_id = (string)obj.First.project_id;
             return issuesList;
         }
     }

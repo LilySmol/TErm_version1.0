@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TErm.Models;
+using System.Resources;
+using System.Reflection;
 
 namespace TErm.Controllers
 {
@@ -13,8 +15,9 @@ namespace TErm.Controllers
         public ActionResult Index()
         {
             GitLabParser gitP = new GitLabParser();
-            List<ProjectModel> list = gitP.getProjectsListByPrivateToken("GG8RjMH3TyguYqP6FBxu", "LilySmol");
-            //List<IssuesModel> model = Parser.getIssuesListByPrivateToken("GG8RjMH3TyguYqP6FBxu");
+            ResourceManager rm = new ResourceManager("TErm.Resource", Assembly.GetExecutingAssembly());
+            string baseUrl = rm.GetString("baseUrl");
+            List<ProjectModel> list = gitP.getProjectsListByPrivateToken("GG8RjMH3TyguYqP6FBxu", "LilySmol");            
             return View(list);
         }
 
