@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using TErm.Models;
 
-namespace TErm.Helpers
+namespace TErm.Helpers.Integration
 {
     interface IParsing
     {

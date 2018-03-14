@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 
-namespace TErm.Helpers
+namespace TErm.Helpers.Integration
 {
     public abstract class Requests
     {

@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using System.Json;
 using TErm.Helpers;
 
-namespace TErm.Controllers
+namespace TErm.Helpers.Integration
 {
     public class GitLabParser: Requests, IParsing
     {

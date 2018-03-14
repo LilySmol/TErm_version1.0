@@ -209,12 +209,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Helpers\GitLabParser.cs" />
+    <Compile Include="Helpers\Clustering\IterationClustering.cs" />
+    <Compile Include="Helpers\Clustering\ClusterCenter.cs" />
+    <Compile Include="Helpers\Clustering\Clustering.cs" />
+    <Compile Include="Helpers\Clustering\ClusterObject.cs" />
+    <Compile Include="Helpers\Integration\GitLabParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\IParsing.cs" />
-    <Compile Include="Helpers\Requests.cs" />
+    <Compile Include="Helpers\Integration\IParsing.cs" />
+    <Compile Include="Helpers\Integration\Requests.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IssuesModel.cs" />
