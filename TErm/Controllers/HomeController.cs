@@ -16,7 +16,8 @@ namespace TErm.Controllers
         {
             GitLabParser gitP = new GitLabParser();
             ResourceManager rm = new ResourceManager("TErm.Resource", Assembly.GetExecutingAssembly());
-            string baseUrl = rm.GetString("baseUrl");
+            string url = rm.GetString("baseUrl");
+            gitP.baseUrl = url;
             List<ProjectModel> list = gitP.getProjectsListByPrivateToken("GG8RjMH3TyguYqP6FBxu", "LilySmol");            
             return View(list);
         }
@@ -34,8 +35,7 @@ namespace TErm.Controllers
         }
 
         public ActionResult IssuesTable()
-        {
-            //List<IssuesModel> model = Parser.getIssuesListByPrivateToken("GG8RjMH3TyguYqP6FBxu");   
+        { 
             return View();
         }
     }

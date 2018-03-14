@@ -13,12 +13,14 @@ namespace TErm.Controllers
 {
     public class GitLabParser: Requests, IParsing
     {
+        public string baseUrl { get; set; }
+
         /// <summary>
         /// Возвращает список проектов по privateToken и имени пользователя.
         /// </summary>
         public List<ProjectModel> getProjectsListByPrivateToken(string privateToken, string userName)
         {
-            string response = get(privateToken, "https://gitlab.com/api/v4/users/" + userName + "/projects");
+            string response = get(privateToken, baseUrl + "/api/v4/users/" + userName + "/projects");
             List<ProjectModel> projectList = JsonConvert.DeserializeObject<List<ProjectModel>>(response);
             foreach (ProjectModel project in projectList)
             {
