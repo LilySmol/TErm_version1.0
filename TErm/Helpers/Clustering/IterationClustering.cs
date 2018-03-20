@@ -6,20 +6,32 @@ using System.Web;
 namespace TErm.Helpers.Clustering
 {
     public class IterationClustering
-    {
-        private int numberIteration;
+    {        
         private ClusterCenter clusterCenter;
-        private ClusterObject clusterObject;
+        private List<ClusterObject> clusterObject;
+        private ClusterObject estimateTime;
 
-        public int NumberIteration { get; set; }
-        public ClusterCenter ClusterCenter { get; set; }
-        public ClusterObject ClusterObject { get; set; }
-
-        public IterationClustering(int numberIteration, ClusterCenter clusterCenter, ClusterObject clusterObject)
+        public ClusterCenter ClusterCenter
         {
-            this.numberIteration = numberIteration;
+            get { return clusterCenter; }
+            set { clusterCenter = value; }
+        }
+        public List<ClusterObject> ClusterObject
+        {
+            get { return clusterObject; }
+            set { clusterObject = value; }
+        }
+        public ClusterObject EstimateTime
+        {
+            get { return estimateTime; }
+            set { estimateTime = value; }
+        }
+
+        public IterationClustering(ClusterCenter clusterCenter, List<ClusterObject> clusterObject, ClusterObject estimateTime)
+        {
             this.clusterCenter = clusterCenter;
             this.clusterObject = clusterObject;
+            this.estimateTime = estimateTime;
         }
     }
 }

@@ -19,16 +19,20 @@ namespace TErm.Helpers.Clustering
         {
             this.objectsList = objectsList;
             this.countClusters = countClusters;
+            centersList = new List<ClusterCenter>();
+            oneIterationList = new List<IterationClustering>();
         }
 
         /// <summary>
         /// Осуществляется начальная инициализация списка центров кластеров.
         /// </summary>
         public void initializationClusterCenters()
-        {
+        {            
             for (int i = 0; i < countClusters; i++)
             {
-                centersList.Add(new ClusterCenter("center" + (i + 1), objectsList[i].AttributeArray, 0));
+                double[] clasterObjectArray = new double[objectsList[i].AttributeArray.Count()];
+                Array.Copy(objectsList[i].AttributeArray, clasterObjectArray, objectsList[i].AttributeArray.Count());
+                centersList.Add(new ClusterCenter("center" + (i + 1), clasterObjectArray, 0));
             }
         }
 
@@ -101,26 +105,69 @@ namespace TErm.Helpers.Clustering
         {
             int numberIteration = 0;
             List<string> changeList = new List<string>();
-            string stringChange = "";
+            string stringChange;
             bool flag = true;
             while (flag)
             {
+                stringChange = "";
                 clarifyCenters();
                 foreach (ClusterObject clusterObject in objectsList)
                 {
-                    oneIterationList.Add(new IterationClustering(numberIteration, centersList[getNumberNearestCenter(clusterObject)], clusterObject));
+                    //oneIterationList.Add(new IterationClustering(numberIteration, centersList[getNumberNearestCenter(clusterObject)], clusterObject));
                     stringChange += centersList[getNumberNearestCenter(clusterObject)].ClusterName;
                 }
                 changeList.Add(stringChange);
                 if (numberIteration > 0)
                 {
-                    if (changeList[numberIteration] == changeList[numberIteration - 1])
+                    if (changeList[numberIteration] == changeList[numberIteration - 1]) //центры кластеров сформировались окончательно
                     {
                         flag = false;
+                        foreach (ClusterCenter clusterCenter in centersList)
+                        {
+                            List<ClusterObject> clusterObjects = getClusterObjectList(clusterCenter);
+                            ClusterObject clusterObject = getNearestEstimateTime(clusterCenter, clusterObjects);
+                            oneIterationList.Add(new IterationClustering(clusterCenter, clusterObjects, clusterObject));
+                        }
                     }
                 }
                 numberIteration++;
             }
+        }
+
+        /// <summary>
+        /// Возвращает список объектов указанного центра кластера
+        /// </summary>
+        public List<ClusterObject> getClusterObjectList(ClusterCenter clusterCenter)
+        {
+            List<ClusterObject> clusterObjects = new List<ClusterObject>();
+            foreach (ClusterObject clusterObject in objectsList)
+            {
+                if (centersList[getNumberNearestCenter(clusterObject)].ClusterName == clusterCenter.ClusterName)
+                {
+                    clusterObjects.Add(clusterObject);
+                }
+            }
+            return clusterObjects;
+        }
+
+        /// <summary>
+        /// Возвращает ближайший к центру объект из списка объектов
+        /// </summary>
+        public ClusterObject getNearestEstimateTime(ClusterCenter clusterCenter, List<ClusterObject> clusterObjects)
+        {
+            double distance = getDistance(clusterObjects[0], clusterCenter);
+            double newDistance = 0;
+            ClusterObject clusterObject = new ClusterObject();
+            for (int i = 0; i < clusterObjects.Count; i++)
+            {
+                newDistance = getDistance(clusterObjects[i], clusterCenter);
+                if (newDistance < distance)
+                {
+                    distance = newDistance;
+                    clusterObject = clusterObjects[i];
+                }
+            }
+            return clusterObject;
         }
     }
 }

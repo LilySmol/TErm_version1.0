@@ -10,8 +10,18 @@ namespace TErm.Helpers.Clustering
         private string objectName;
         private double[] attributeArray;
 
-        public string ObjectName { get; set; }
-        public double[] AttributeArray { get; set; }
+        public string ObjectName
+        {
+            get { return objectName; }
+            set { objectName = value; }
+        }
+        public double[] AttributeArray
+        {
+            get { return attributeArray; }
+            set { attributeArray = value; }
+        }
+
+        public ClusterObject() { }
 
         public ClusterObject(string objectName, double[] attributeArray)
         {
