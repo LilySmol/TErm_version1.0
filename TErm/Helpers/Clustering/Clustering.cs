@@ -8,9 +8,14 @@ namespace TErm.Helpers.Clustering
     public class Clustering
     {
         private List<ClusterCenter> centersList;
-        private List<ClusterObject> objectsList;
+        private List<ClusterObject> objectsList;        
+        private int countClusters;
         private List<Cluster> clusterList;
-        private int countClusters; 
+        public List<Cluster> ClusterList
+        {
+            get { return clusterList; }
+            set { clusterList = value; }
+        }
 
         /// <summary>
         /// Осуществляется инициализация списка объектов кластеризации и количества кластеров.
@@ -32,7 +37,7 @@ namespace TErm.Helpers.Clustering
             {
                 double[] clasterObjectArray = new double[objectsList[i].AttributeArray.Count()];
                 Array.Copy(objectsList[i].AttributeArray, clasterObjectArray, objectsList[i].AttributeArray.Count());
-                centersList.Add(new ClusterCenter("center" + (i + 1), clasterObjectArray, 0));
+                centersList.Add(new ClusterCenter("center" + (i + 1), clasterObjectArray));
             }
         }
 

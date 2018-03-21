@@ -213,6 +213,7 @@
     <Compile Include="Helpers\Clustering\ClusterCenter.cs" />
     <Compile Include="Helpers\Clustering\Clustering.cs" />
     <Compile Include="Helpers\Clustering\ClusterObject.cs" />
+    <Compile Include="Helpers\Clustering\InputDataConverter.cs" />
     <Compile Include="Helpers\Integration\GitLabParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

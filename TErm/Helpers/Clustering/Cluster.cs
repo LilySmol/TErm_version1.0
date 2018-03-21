@@ -21,7 +21,7 @@ namespace TErm.Helpers.Clustering
             get { return clusterObject; }
             set { clusterObject = value; }
         }
-        public ClusterObject EstimateTime
+        public ClusterObject NearestObject
         {
             get { return nearestObject; }
             set { nearestObject = value; }

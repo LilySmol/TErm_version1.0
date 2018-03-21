@@ -9,7 +9,6 @@ namespace TErm.Helpers.Clustering
     {
         private string clusterCenterName;
         private double[] attributeArray;
-        private int estimateTime;
 
         public string ClusterName
         {
@@ -21,17 +20,11 @@ namespace TErm.Helpers.Clustering
             get { return attributeArray; }
             set { attributeArray = value; }
         }
-        public int EstimateTime
-        {
-            get { return estimateTime; }
-            set { estimateTime = value; }
-        }
 
-        public ClusterCenter(string clusterName, double[] attributeArray, int estimateTime)
+        public ClusterCenter(string clusterName, double[] attributeArray)
         {
             this.clusterCenterName = clusterName;
             this.attributeArray = attributeArray;
-            this.estimateTime = estimateTime;
         }
     }
 }
