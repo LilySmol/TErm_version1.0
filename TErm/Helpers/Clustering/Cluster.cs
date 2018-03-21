@@ -5,11 +5,11 @@ using System.Web;
 
 namespace TErm.Helpers.Clustering
 {
-    public class IterationClustering
+    public class Cluster
     {        
         private ClusterCenter clusterCenter;
         private List<ClusterObject> clusterObject;
-        private ClusterObject estimateTime;
+        private ClusterObject nearestObject;
 
         public ClusterCenter ClusterCenter
         {
@@ -23,15 +23,15 @@ namespace TErm.Helpers.Clustering
         }
         public ClusterObject EstimateTime
         {
-            get { return estimateTime; }
-            set { estimateTime = value; }
+            get { return nearestObject; }
+            set { nearestObject = value; }
         }
 
-        public IterationClustering(ClusterCenter clusterCenter, List<ClusterObject> clusterObject, ClusterObject estimateTime)
+        public Cluster(ClusterCenter clusterCenter, List<ClusterObject> clusterObject, ClusterObject estimateTime)
         {
             this.clusterCenter = clusterCenter;
             this.clusterObject = clusterObject;
-            this.estimateTime = estimateTime;
+            this.nearestObject = estimateTime;
         }
     }
 }

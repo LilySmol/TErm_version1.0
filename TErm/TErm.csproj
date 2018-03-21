@@ -209,7 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Helpers\Clustering\IterationClustering.cs" />
+    <Compile Include="Helpers\Clustering\Cluster.cs" />
     <Compile Include="Helpers\Clustering\ClusterCenter.cs" />
     <Compile Include="Helpers\Clustering\Clustering.cs" />
     <Compile Include="Helpers\Clustering\ClusterObject.cs" />

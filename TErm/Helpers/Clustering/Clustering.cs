@@ -9,7 +9,7 @@ namespace TErm.Helpers.Clustering
     {
         private List<ClusterCenter> centersList;
         private List<ClusterObject> objectsList;
-        private List<IterationClustering> oneIterationList;
+        private List<Cluster> clusterList;
         private int countClusters; 
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace TErm.Helpers.Clustering
             this.objectsList = objectsList;
             this.countClusters = countClusters;
             centersList = new List<ClusterCenter>();
-            oneIterationList = new List<IterationClustering>();
+            clusterList = new List<Cluster>();
         }
 
         /// <summary>
@@ -113,7 +113,6 @@ namespace TErm.Helpers.Clustering
                 clarifyCenters();
                 foreach (ClusterObject clusterObject in objectsList)
                 {
-                    //oneIterationList.Add(new IterationClustering(numberIteration, centersList[getNumberNearestCenter(clusterObject)], clusterObject));
                     stringChange += centersList[getNumberNearestCenter(clusterObject)].ClusterName;
                 }
                 changeList.Add(stringChange);
@@ -126,7 +125,7 @@ namespace TErm.Helpers.Clustering
                         {
                             List<ClusterObject> clusterObjects = getClusterObjectList(clusterCenter);
                             ClusterObject clusterObject = getNearestEstimateTime(clusterCenter, clusterObjects);
-                            oneIterationList.Add(new IterationClustering(clusterCenter, clusterObjects, clusterObject));
+                            clusterList.Add(new Cluster(clusterCenter, clusterObjects, clusterObject));
                         }
                     }
                 }
