@@ -129,8 +129,11 @@ namespace TErm.Helpers.Clustering
                         foreach (ClusterCenter clusterCenter in centersList)
                         {
                             List<ClusterObject> clusterObjects = getClusterObjectList(clusterCenter);
-                            ClusterObject clusterObject = getNearestEstimateTime(clusterCenter, clusterObjects);
-                            clusterList.Add(new Cluster(clusterCenter, clusterObjects, clusterObject));
+                            if (clusterObjects.Count != 0)
+                            {
+                                ClusterObject clusterObject = getNearestObject(clusterCenter, clusterObjects);
+                                clusterList.Add(new Cluster(clusterCenter, clusterObjects, clusterObject));
+                            }                            
                         }
                     }
                 }
@@ -155,9 +158,9 @@ namespace TErm.Helpers.Clustering
         }
 
         /// <summary>
-        /// Возвращает ближайший к центру объект из списка объектов
+        /// Возвращает ближайший к центру объект из списка объектов этого центра
         /// </summary>
-        public ClusterObject getNearestEstimateTime(ClusterCenter clusterCenter, List<ClusterObject> clusterObjects)
+        public ClusterObject getNearestObject(ClusterCenter clusterCenter, List<ClusterObject> clusterObjects)
         {
             double distance = getDistance(clusterObjects[0], clusterCenter);
             double newDistance = 0;

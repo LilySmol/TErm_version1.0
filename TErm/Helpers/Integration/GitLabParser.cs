@@ -24,7 +24,7 @@ namespace TErm.Helpers.Integration
             List<ProjectModel> projectList = JsonConvert.DeserializeObject<List<ProjectModel>>(response);
             foreach (ProjectModel project in projectList)
             {
-                project.issuesList = getIssuesListByPrivateToken(privateToken, project._links.issues);
+                project.issuesList = getIssuesListByPrivateToken(privateToken, project._links.issues + "?per_page=100");
             }
             return projectList;
         }
