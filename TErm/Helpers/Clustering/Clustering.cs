@@ -32,12 +32,18 @@ namespace TErm.Helpers.Clustering
         /// Осуществляется начальная инициализация списка центров кластеров.
         /// </summary>
         public void initializationClusterCenters()
-        {            
-            for (int i = 0; i < countClusters; i++)
+        {
+            int step = objectsList.Count / countClusters;
+            int numberCenterCluster = step;
+            for (int i = 0; i < objectsList.Count; i++)
             {
-                double[] clasterObjectArray = new double[objectsList[i].AttributeArray.Count()];
-                Array.Copy(objectsList[i].AttributeArray, clasterObjectArray, objectsList[i].AttributeArray.Count());
-                centersList.Add(new ClusterCenter("center" + (i + 1), clasterObjectArray));
+                if (i == numberCenterCluster)
+                {
+                    double[] clasterObjectArray = new double[objectsList[i].AttributeArray.Count()];
+                    Array.Copy(objectsList[i].AttributeArray, clasterObjectArray, objectsList[i].AttributeArray.Count());
+                    centersList.Add(new ClusterCenter("center" + (i + 1), clasterObjectArray));
+                    numberCenterCluster += step;
+                }                
             }
         }
 
