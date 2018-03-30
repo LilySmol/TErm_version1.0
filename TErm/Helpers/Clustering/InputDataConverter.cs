@@ -54,7 +54,7 @@ namespace TErm.Helpers.Clustering
             }
             foreach (string word in totalWordsList)
             {
-                if (totalWordsList.Count(l => l == word) > 1)
+                if (totalWordsList.Count(l => l == word) > 2)
                 {
                     dictionary.Add(word);
                 }
