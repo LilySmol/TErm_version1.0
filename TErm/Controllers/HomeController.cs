@@ -14,17 +14,22 @@ namespace TErm.Controllers
 {
     public class HomeController : Controller
     {
+        static Clustering clustering = new Clustering();        
+        static ResourceManager resource = new ResourceManager("TErm.Resource", Assembly.GetExecutingAssembly());
+
         public ActionResult Index()
         {
-            GitLabParser gitP = new GitLabParser();
-            ResourceManager rm = new ResourceManager("TErm.Resource", Assembly.GetExecutingAssembly());
-            string url = rm.GetString("baseUrl");
-            gitP.baseUrl = url;
-            List<ProjectModel> projectList = gitP.getProjectsListByPrivateToken("GG8RjMH3TyguYqP6FBxu", "LilySmol");
+            int testProjectId = Convert.ToInt32(resource.GetString("testProjectId"));
+            List<ProjectModel> projectList = getProjectsList(resource.GetString("testProjectToken"), resource.GetString("testProjectUser"));
             InputDataConverter inputDataConverter = new InputDataConverter();
-            Clustering clustering = new Clustering(inputDataConverter.convertToClusterObject(projectList[0].issuesList), 9);
+            var projectSelected = from project in projectList
+                                  where project.id == testProjectId
+                                  select project;
+            ProjectModel projectWithTestData = projectSelected.ToList()[0];
+            clustering = new Clustering(inputDataConverter.convertListToClusterObject(projectWithTestData.issuesList), 9);
             clustering.initializationClusterCenters();
-            clustering.clustering();  
+            clustering.clustering();
+
             return View();
         }
 
@@ -43,6 +48,50 @@ namespace TErm.Controllers
         public ActionResult IssuesTable()
         { 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(UserModel person)
+        {
+            if (person.IdProjectForPrognosis == 0)
+            {
+                string privateToken = person.Token;
+                string name = person.Name;
+                List<ProjectModel> projectList = getProjectsList(privateToken, name);
+                UserModel.Projects = projectList;
+            }
+            else
+            {               
+                int projectId = person.IdProjectForPrognosis;
+                prognosis(person);
+                
+            }
+            return View(person);
+        }
+
+        protected List<ProjectModel> getProjectsList(string token, string user)
+        {
+            GitLabParser gitLabParser = new GitLabParser();            
+            gitLabParser.baseUrl = resource.GetString("baseUrl");
+            return gitLabParser.getProjectsListByPrivateToken(token, user);         
+        }
+
+        protected void prognosis(UserModel user)
+        {
+            var project = from p in UserModel.Projects
+                          where p.id == user.IdProjectForPrognosis
+                          select p;
+            ProjectModel projectForPrognosis = project.ToList()[0];
+            InputDataConverter inputDataConverter = new InputDataConverter();
+            foreach (IssuesModel issue in projectForPrognosis.issuesList)
+            {
+                if (issue.time_stats.time_estimate == 0 && issue.time_stats.total_time_spent == 0)
+                {
+                    issue.time_stats.time_estimate = clustering.ClusterList[clustering
+                        .getNumberNearestCenter(inputDataConverter.convertToClusterObject(issue))]
+                        .NearestObject.SpentTime;
+                }
+            }
         }
     }
 }

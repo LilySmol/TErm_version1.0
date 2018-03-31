@@ -17,6 +17,8 @@ namespace TErm.Helpers.Clustering
             set { clusterList = value; }
         }
 
+        public Clustering() { }
+
         /// <summary>
         /// Осуществляется инициализация списка объектов кластеризации и количества кластеров.
         /// </summary>

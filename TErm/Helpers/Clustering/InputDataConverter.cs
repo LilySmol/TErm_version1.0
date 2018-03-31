@@ -14,29 +14,40 @@ namespace TErm.Helpers.Clustering
         /// <summary>
         /// Преобразует объекты списка IssuesModel в список ClusterObject
         /// </summary>
-        public List<ClusterObject> convertToClusterObject(List<IssuesModel> issuesModel)
+        public List<ClusterObject> convertListToClusterObject(List<IssuesModel> issuesModel)
         {
-            DICTIONARY = dictionaryInitialize(issuesModel);
-            COUNTWORDS = DICTIONARY.Count();
+            if (DICTIONARY.Count == 0)
+            {
+                DICTIONARY = dictionaryInitialize(issuesModel);
+                COUNTWORDS = DICTIONARY.Count();
+            }            
             List<ClusterObject> clusterObject = new List<ClusterObject>();
             foreach (IssuesModel issue in issuesModel)
-            {
-                double[] issueArray = new double[COUNTWORDS];
-                string[] issueWordsArray = String.Concat(issue.title.ToLower(), " ", issue.description.ToLower()).Split(' ');                
-                for (int i = 0; i < COUNTWORDS; i++)
-                {
-                    if (issueWordsArray.Contains(DICTIONARY[i]))
-                    {
-                        issueArray[i] = 1;
-                    }
-                    else
-                    {
-                        issueArray[i] = 0;
-                    }
-                }
-                clusterObject.Add(new ClusterObject(issue.iid.ToString(), issueArray, issue.title, issue.time_stats.total_time_spent, issue.time_stats.time_estimate));
+            {                
+                clusterObject.Add(convertToClusterObject(issue));
             }
             return clusterObject;
+        }
+
+        /// <summary>
+        /// Преобразует задачу в объект кластера
+        /// </summary>
+        public ClusterObject convertToClusterObject(IssuesModel issues)
+        {
+            double[] issueArray = new double[COUNTWORDS];
+            string[] issueWordsArray = String.Concat(issues.title.ToLower(), " ", issues.description.ToLower()).Split(' ');
+            for (int i = 0; i < COUNTWORDS; i++)
+            {
+                if (issueWordsArray.Contains(DICTIONARY[i]))
+                {
+                    issueArray[i] = 1;
+                }
+                else
+                {
+                    issueArray[i] = 0;
+                }
+            }
+            return new ClusterObject(issues.iid.ToString(), issueArray, issues.title, issues.time_stats.total_time_spent, issues.time_stats.time_estimate);
         }
 
         /// <summary>
@@ -61,5 +72,7 @@ namespace TErm.Helpers.Clustering
             }
             return dictionary.Distinct().ToList();
         }
+
+
     }
 }

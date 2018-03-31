@@ -68,5 +68,32 @@ namespace TErm {
                 return ResourceManager.GetString("baseUrl", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на 5831163.
+        /// </summary>
+        internal static string testProjectId {
+            get {
+                return ResourceManager.GetString("testProjectId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на GG8RjMH3TyguYqP6FBxu.
+        /// </summary>
+        internal static string testProjectToken {
+            get {
+                return ResourceManager.GetString("testProjectToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на LilySmol.
+        /// </summary>
+        internal static string testProjectUser {
+            get {
+                return ResourceManager.GetString("testProjectUser", resourceCulture);
+            }
+        }
     }
 }
