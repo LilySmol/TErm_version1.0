@@ -33,7 +33,7 @@
     }
 </div>
 
-@if (Model != null)
+@if (Model != null && UserModel.Projects != null)
 {
     using (Html.BeginForm("Index", "Home", FormMethod.Post))
     {

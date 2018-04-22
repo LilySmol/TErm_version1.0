@@ -9,6 +9,7 @@ using System.Resources;
 using System.Reflection;
 using TErm.Helpers.Integration;
 using TErm.Helpers.Clustering;
+using NLog;
 
 namespace TErm.Controllers
 {
@@ -16,6 +17,7 @@ namespace TErm.Controllers
     {
         static Clustering clustering = new Clustering();        
         static ResourceManager resource = new ResourceManager("TErm.Resource", Assembly.GetExecutingAssembly());
+        private Logger logger = LogManager.GetCurrentClassLogger();
 
         public ActionResult Index()
         {
@@ -87,9 +89,9 @@ namespace TErm.Controllers
             {
                 if (issue.time_stats.time_estimate == 0 && issue.time_stats.total_time_spent == 0)
                 {
-                    issue.time_stats.time_estimate = clustering.ClusterList[clustering
-                        .getNumberNearestCenter(inputDataConverter.convertToClusterObject(issue))]
-                        .NearestObject.SpentTime;
+                    Cluster clusterCenter = clustering.ClusterList[clustering.getNumberNearestCenter(inputDataConverter.convertToClusterObject(issue))];
+                    issue.time_stats.time_estimate = clusterCenter.NearestObject.SpentTime;
+                    logger.Info("Задача: " + issue.title + " Oтносится к кластеру: " + clusterCenter.NearestObject.Title);
                 }
             }
         }
